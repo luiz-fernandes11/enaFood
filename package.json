@@ -1,0 +1,17 @@
+{
+  "name": "food",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:luiz-fernandes11/enaFood.git",
+  "author": "Luiz Fernandes <luiz.fernandes1@aluno.ufop.edu.br>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
