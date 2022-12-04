@@ -1,5 +1,6 @@
-const mongoose = require('mongoose')
-const Schema = mongoose.Schema
+import mongoose, { Schema } from 'mongoose'
+//const mongoose = require('mongoose')
+//const Schema = mongoose.Schema
 
 const productSchema = new Schema({
   nome: {
@@ -18,4 +19,30 @@ const productSchema = new Schema({
   }
 })
 
-module.exports = mongoose.model('Product', productSchema)
+productSchema.methods = {
+  view(full) {
+    const view = {
+      // simple view
+      id: this.id,
+      nome: this.nome,
+      preco: this.preco,
+      estoque: this.estoque
+    }
+
+    return full
+      ? {
+        ...view,
+        // add properties for a full view
+      }
+      : view
+  },
+}
+
+
+
+
+//module.exports = mongoose.model('Product', productSchema)
+const model = mongoose.model('Product', productSchema)
+
+export const schema = model.schema
+export default model 
