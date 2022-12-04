@@ -1,37 +1,64 @@
 const express = require('express')
-
 const server = express()
 server.use(express.json())
+var mongoose = require('mongoose')
+const product = require('./models/product')
+var apiRouter = express.Router()
 
-const produtos = []
+mongoose.connect('mongodb://localhost:27017/CRM')
 
-server.get('/produtos', (req, res) => {
-  return res.json(produtos)
+const carrinho = []
+
+server.get('/carrinho', (req, res) => {
+  return res.json(carrinho)
 })
 
-server.get('/produtos/:index', (req, res) => {
+
+/*server.route('/carrinho')
+  .post(function(req, res) {
+    var produto = new product()
+    produto.nome = req.body.name
+    produto.preco = req.body.preco
+    produto.estoque = req.body.estoque
+
+    produto.save(function(err){
+      if(err){
+        if(err.code === 11000){
+          return res.json({
+            sucess: false,
+            message: 'já existe um produto com esse nome!'
+          })
+        } else{
+          return res.send(err)
+        }
+      }
+      res.json({message: 'Produto criado!'})
+    })
+  })*/
+
+server.get('/carrinho/:index', (req, res) => {
   return res.json(req.user)
 })
 
-server.post('/produtos', checkProductExists, (req, res) => {
+server.post('/carrinho', checkProductExists, (req, res) => {
   const { name } = req.body
-  produtos.push(name)
-  return res.json(produtos)
+  carrinho.push(name)
+  return res.json(carrinho)
 })
 
-server.put('/produtos/:index', checkProductInArray, (req, res) => {
+server.put('/carrinho/:index', checkProductInArray, (req, res) => {
   const { index } = req.params
   const { name } = req.body
 
-  produtos[index] = name
+  carrinho[index] = name
 
-  return res.json(produtos)
+  return res.json(carrinho)
 })
 
-server.delete('/produtos/:index', (req, res) => {
+server.delete('/carrinho/:index', (req, res) => {
   const { index } = req.params
 
-  produtos.splice(index, 1)
+  carrinho.splice(index, 1)
 
   return res.send()
 })
@@ -44,11 +71,11 @@ function checkProductExists(req, res, next) {
 }
 
 function checkProductInArray(req, res, next) {
-  const product = produtos[req.params.index]
-  if (!product) {
+  const cart = carrinho[req.params.index]
+  if (!cart) {
     return res.status(400).json({ error: 'product does not exists' })
   }
-  req.product = product
+  req.cart = cart
 
   return next()
 }

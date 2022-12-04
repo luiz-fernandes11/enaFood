@@ -2,16 +2,27 @@
   "name": "food",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:luiz-fernandes11/enaFood.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/luiz-fernandes11/enaFood.git"
+  },
   "author": "Luiz Fernandes <luiz.fernandes1@aluno.ufop.edu.br>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "~4.18.2",
+    "mongoose": "~6.7.5",
+    "prompt": "^1.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "description": "",
+  "bugs": {
+    "url": "https://github.com/luiz-fernandes11/enaFood/issues"
+  },
+  "homepage": "https://github.com/luiz-fernandes11/enaFood#readme"
 }
