@@ -41,3 +41,10 @@ export const notFound = (res) => (entity) => {
   res.status(404).end()
   return null
 }
+
+export const destroy = ({ params }, res, next) =>
+  Product.findById(params.id)
+    .then(notFound(res))
+    .then((product) => (product ? product.remove() : null))
+    .then(success(res, 204))
+    .catch(next)

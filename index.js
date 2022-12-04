@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import { middleware as query } from 'querymen'
 import { middleware as body, Schema } from 'bodymen'
 import bodyParser from 'body-parser'
-import { index, create, update } from './controller.js'
+import { index, create, update, destroy } from './controller.js'
 export { Product, schema }
 
 const server = express()
@@ -30,5 +30,8 @@ server.put('/carrinho/:id',
   update
 )
 
+server.delete('/carrinho/:id',
+  destroy
+)
 
 server.listen(8880)
