@@ -22,3 +22,22 @@ export const create = ({ bodymen: { body } }, res, next) =>
     .then((product) => product.view(true))
     .then(success(res, 201))
     .catch(next)
+
+
+export const update = ({ bodymen: { body }, params }, res, next) =>
+  Product.findById(params.id)
+    .then(notFound(res))
+    .then((product) =>
+      product ? Object.assign(product, body).save() : null,
+    )
+    .then((product) => (product ? product.view(true) : null))
+    .then(success(res))
+    .catch(next)
+
+export const notFound = (res) => (entity) => {
+  if (entity) {
+    return entity
+  }
+  res.status(404).end()
+  return null
+}

@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import { middleware as query } from 'querymen'
 import { middleware as body, Schema } from 'bodymen'
 import bodyParser from 'body-parser'
-import { index, create } from './controller.js'
+import { index, create, update } from './controller.js'
 export { Product, schema }
 
 const server = express()
@@ -23,6 +23,11 @@ server.post(
   '/carrinho',
   body({ nome, preco, estoque }),
   create,
+)
+
+server.put('/carrinho/:id',
+  body({ nome, preco, estoque }),
+  update
 )
 
 
