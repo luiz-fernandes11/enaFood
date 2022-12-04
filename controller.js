@@ -17,3 +17,8 @@ export const index = ({ querymen: { query, select, cursor } }, res, next) =>
     .then(success(res))
     .catch(next)
 
+export const create = ({ bodymen: { body } }, res, next) =>
+  Product.create(body)
+    .then((product) => product.view(true))
+    .then(success(res, 201))
+    .catch(next)

@@ -2,8 +2,9 @@ import express from 'express'
 import Product, { schema } from './models/product.js'
 import mongoose from 'mongoose'
 import { middleware as query } from 'querymen'
+import { middleware as body, Schema } from 'bodymen'
 import bodyParser from 'body-parser'
-import { index } from './controller.js'
+import { index, create } from './controller.js'
 export { Product, schema }
 
 const server = express()
@@ -18,6 +19,11 @@ server.get(
   index,
 )
 
+server.post(
+  '/carrinho',
+  body({ nome, preco, estoque }),
+  create,
+)
 
 
 server.listen(8880)
